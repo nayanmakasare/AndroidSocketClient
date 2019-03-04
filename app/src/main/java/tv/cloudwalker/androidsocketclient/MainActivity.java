@@ -1,6 +1,7 @@
 package tv.cloudwalker.androidsocketclient;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.nsd.NsdManager;
 import android.net.nsd.NsdServiceInfo;
 import android.os.Environment;
@@ -28,6 +29,7 @@ import java.net.UnknownHostException;
 import java.security.KeyStore;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManager;
@@ -38,6 +40,10 @@ import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
+
+import Utils.CustomHttpClient;
+import okhttp3.OkHttpClient;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,100 +56,12 @@ public class MainActivity extends AppCompatActivity {
     private Socket socket;
 
 
-    NsdManager.DiscoveryListener mDiscoveryListener = new NsdManager.DiscoveryListener() {
-
-        // Called as soon as service discovery begins.
-        @Override
-        public void onDiscoveryStarted(String regType) {
-            Log.d(TAG, "Service discovery started");
-        }
-
-        @Override
-        public void onServiceFound(NsdServiceInfo service) {
-            // A service was found! Do something with it.
-            Log.d(TAG, "Service discovery success : " + service);
-            Log.d(TAG, "Host = "+ service.getServiceName());
-            Log.d(TAG, "port = " + String.valueOf(service.getPort()));
-
-            if(service.getServiceName().compareToIgnoreCase(SERVICE_NAME)==0){
-                mNsdManager.resolveService(service, mResolveListener);
-            }
-
-//            if (!service.getServiceType().equals(SERVICE_TYPE)) {
-//                // Service type is the string containing the protocol and
-//                // transport layer for this service.
-//                Log.d(TAG, "Unknown Service Type: " + service.getServiceType());
-//            } else if (service.getServiceName().equals(SERVICE_NAME)) {
-//                // The name of the service tells the user what they'd be
-//                // connecting to. It could be "Bob's Chat App".
-//                Log.d(TAG, "Same machine: " + SERVICE_NAME);
-//            } else {
-//                Log.d(TAG, "Diff Machine : " + service.getServiceName());
-//                // connect to the service and obtain serviceInfo
-//                mNsdManager.resolveService(service, mResolveListener);
-//            }
-        }
-
-        @Override
-        public void onServiceLost(NsdServiceInfo service) {
-            // When the network service is no longer available.
-            // Internal bookkeeping code goes here.
-            Log.e(TAG, "service lost" + service);
-        }
-
-        @Override
-        public void onDiscoveryStopped(String serviceType) {
-            Log.i(TAG, "Discovery stopped: " + serviceType);
-        }
-
-        @Override
-        public void onStartDiscoveryFailed(String serviceType, int errorCode) {
-            Log.e(TAG, "Discovery failed: Error code:" + errorCode);
-            mNsdManager.stopServiceDiscovery(this);
-        }
-
-        @Override
-        public void onStopDiscoveryFailed(String serviceType, int errorCode) {
-            Log.e(TAG, "Discovery failed: Error code:" + errorCode);
-            mNsdManager.stopServiceDiscovery(this);
-        }
-    };
-
-
-    NsdManager.ResolveListener mResolveListener = new NsdManager.ResolveListener() {
-
-        @Override
-        public void onResolveFailed(NsdServiceInfo serviceInfo, int errorCode) {
-            // Called when the resolve fails. Use the error code to debug.
-            Log.e(TAG, "Resolve failed " + errorCode);
-            Log.e(TAG, "serivce = " + serviceInfo);
-        }
-
-        @Override
-        public void onServiceResolved(NsdServiceInfo serviceInfo) {
-            Log.d(TAG, "Resolve Succeeded. " + serviceInfo);
-
-//            if (serviceInfo.getServiceName().equals(SERVICE_NAME)) {
-//                Log.d(TAG, "Same IP.");
-//                return;
-//            }
-
-            // Obtain port and IP
-            hostPort = serviceInfo.getPort();
-            hostAddress = serviceInfo.getHost();
-            Log.d(TAG, "onServiceResolved: "+hostPort+" "+hostAddress);
-
-            Thread thread = new Thread(new ClientThread());
-            thread.start();
-        }
-    };
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mNsdManager = (NsdManager) getSystemService(Context.NSD_SERVICE);
+        startActivity(new Intent(this, SignInActivity.class));
+
     }
 
 
@@ -165,26 +83,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    // Start to run the server
-//    public void cwRun(){
-//        Log.d(TAG, "cwRun: ");
-//        SSLContext sslContext = this.createSSLContext();
-//        Log.d(TAG, "cwRun: sslcontext "+sslContext);
-//        try{
-//            // Create socket factory
-//            SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
-//
-//            // Create socket
-//            SSLSocket sslSocket = (SSLSocket) sslSocketFactory.createSocket(hostAddress, hostPort);
-//            Log.d(TAG, "cwRun: SSL client started");
-//            new ClientThread(sslSocket).start();
-//        } catch (Exception ex){
-//            ex.printStackTrace();
-//        }
-//    }
+    // Start to run the server
+    public void cwRun(){
+        Log.d(TAG, "cwRun: ");
+        SSLContext sslContext = this.createSSLContext();
+        Log.d(TAG, "cwRun: sslcontext "+sslContext);
+        try{
+                // Create socket factory
+    //            SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+                SSLSocketFactory sslSocketFactory = CustomHttpClient.getOkHttps(MainActivity.this).sslSocketFactory();
+
+                // Create socket
+                SSLSocket sslSocket = (SSLSocket) sslSocketFactory.createSocket(hostAddress, hostPort);
+                Log.d(TAG, "cwRun: SSL client started");
+//                new ClientThread(sslSocket).start();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
 
 
-//    // Thread handling the socket to server
+    // Thread handling the socket to server
 //    static class ClientThread extends Thread {
 //        private SSLSocket sslSocket = null;
 //
@@ -193,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //
 //        public void run(){
-//            sslSocket.setEnabledCipherSuites(sslSocket.getEnabledCipherSuites());
+//            sslSocket.setEnabledCipherSuites(sslSocket.getSupportedCipherSuites());
 //
 //            try{
 //                // Start handshake
@@ -239,72 +158,8 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 
-    class ClientThread implements Runnable {
-
-        @Override
-        public void run() {
-            try {
-                Log.d(TAG, "run: client thread "+hostAddress+" "+hostPort);
-                socket = new Socket(hostAddress, hostPort);
-
-            }
-            catch (final UnknownHostException e1) {
-                e1.printStackTrace();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(MainActivity.this, e1.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-            } catch (final IOException e1) {
-                e1.printStackTrace();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(MainActivity.this, e1.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-            catch (final Exception e){
-                e.printStackTrace();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-
-        }
-
-    }
 
 
-    @Override
-    protected void onPause() {
-        if (mNsdManager != null) {
-            mNsdManager.stopServiceDiscovery(mDiscoveryListener);
-        }
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mNsdManager != null) {
-            mNsdManager.discoverServices(
-                    SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, mDiscoveryListener);
-        }
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (mNsdManager != null) {
-            mNsdManager.stopServiceDiscovery(mDiscoveryListener);
-        }
-        super.onDestroy();
-    }
 
 
 
