@@ -19,6 +19,8 @@ import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import Utils.PreferenceManager;
+
 public class SignInActivity extends Activity implements View.OnClickListener {
 
     private GoogleSignInClient mGoogleSignInClient;
@@ -76,6 +78,10 @@ public class SignInActivity extends Activity implements View.OnClickListener {
             Log.d(TAG, "updateUI: id "+account.getId());
             Log.d(TAG, "updateUI: id token  "+account.getIdToken());
             ((TextView)findViewById(R.id.signInmessage)).setText("Successfull");
+
+//            new PreferenceManager(this).setUserEmail(account.getEmail());
+//            new PreferenceManager(this).setUserName(account.getDisplayName());
+//            new PreferenceManager(this).setGoogleId(account.getId());
 
             Intent formIntent = new Intent(SignInActivity.this, CloudwalkerFormActivity.class);
             Bundle bundle = new Bundle();
@@ -145,16 +151,16 @@ public class SignInActivity extends Activity implements View.OnClickListener {
           Sign-out is initiated by simply calling the googleSignInClient.signOut API. We add a
           listener which will be invoked once the sign out is the successful
            */
-        mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                //On Succesfull signout we navigate the user back to LoginActivity
-                Log.d(TAG, "onComplete: signout");
-                Intent intent=new Intent(SignInActivity.this,MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
+            mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    //On Succesfull signout we navigate the user back to LoginActivity
+                    Log.d(TAG, "onComplete: signout");
+                    Intent intent=new Intent(SignInActivity.this,MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+            });
     }
 
     private void signIn() {

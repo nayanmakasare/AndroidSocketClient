@@ -9,12 +9,19 @@
     <string name="webApplicationClientId">231757569892-kj5fclgdo0i0ujlv8trp346ajpvh2i68.apps.googleusercontent.com</string>
     <string name="title_activity_form">Login Form</string>
 
-    <string name="rabbit_host">rabbit.cloudwalker.tv</string>
+    <!--<string name="rabbit_host">rabbit.cloudwalker.tv</string>-->
+    <!--<string name="rabbit_port">5672</string>-->
+    <!--<string name="rabbit_vHost">/</string>-->
+    <!--<string name="rabbit_userName">tvrabbit</string>-->
+    <!--<string name="rabbit_password">t^ra66!T</string>-->
+
+    <string name="rabbit_exchange">kidsTopic</string>
+
+    <string name="rabbit_host">woodpecker.rmq.cloudamqp.com</string>
     <string name="rabbit_port">5672</string>
-    <string name="rabbit_vHost">/</string>
-    <string name="rabbit_userName">tvrabbit</string>
-    <string name="rabbit_password">t^ra66!T</string>
-    <string name="rabbit_exchange">cwTopic</string>
+    <string name="rabbit_vHost">mohwncfy</string>
+    <string name="rabbit_userName">mohwncfy</string>
+    <string name="rabbit_password">9R-PXN-kTy2tr6J0qtnA3R1ANPl0hQoH</string>
 
 
     <!-- Strings related to login -->
