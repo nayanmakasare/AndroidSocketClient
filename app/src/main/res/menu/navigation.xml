@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/remoteController"
+        android:icon="@drawable/remote"
+        android:title="Tv Remote"
+        />
+    <item
+        android:id="@+id/profileNavigation"
+        android:icon="@drawable/profilenav"
+        android:title="Profile" />
+</menu>

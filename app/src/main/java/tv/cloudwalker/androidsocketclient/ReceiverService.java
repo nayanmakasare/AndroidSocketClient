@@ -9,7 +9,7 @@ import android.util.Log;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.QueueingConsumer;
+import com.squareup.otto.Subscribe;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 import Utils.OttoBus;
+import model.RabbitSendMessage;
 
 public class ReceiverService extends Service {
 
@@ -53,7 +54,7 @@ public class ReceiverService extends Service {
         imei = intent.getStringExtra("imei");
         tvRoutingKey = intent.getStringExtra("rabbit");
         imei = imei.replaceAll(":", "");
-        StringBuilder sb = new StringBuilder("cw.kids");
+        StringBuilder sb = new StringBuilder("cw.kids.app");
         routingKeyString.add(sb.toString());
         sb.append(".");
         sb.append(imei);
@@ -102,31 +103,28 @@ public class ReceiverService extends Service {
                         queueArguments.put("x-message-ttl", 60000);
                         channel.queueDeclare(imei, true, false, false, queueArguments);
                         // bind queue to channels
-                        for(String routingKey : routingKeyString)
-                        {
+                        for(String routingKey : routingKeyString) {
                             channel.queueBind(imei, getString(R.string.rabbit_exchange), routingKey);
                         }
-                        QueueingConsumer consumer = new QueueingConsumer(channel);
-                        channel.basicConsume(imei, true, consumer);
-
-                        while(true) {
-                            try {
-                                QueueingConsumer.Delivery delivery = consumer.nextDelivery();
-                                String message = new String(delivery.getBody());
-                                Log.d(TAG, "rabbitMessage: "+message);
-                                OttoBus.getBus().post(message);
-
-                            } catch(InterruptedException ie) {
-                                ie.printStackTrace();
-                                return;
-                            }
-                        }
+//                        QueueingConsumer consumer = new QueueingConsumer(channel);
+//                        channel.basicConsume(imei, true, consumer);
+//
+//                        while(true) {
+//                            try {
+//                                QueueingConsumer.Delivery delivery = consumer.nextDelivery();
+//                                String message = new String(delivery.getBody());
+//                                Log.d(TAG, "rabbitMessage: "+ message);
+//                                OttoBus.getBus().post(new RabbitReceiveMessage(message));
+//                            } catch(InterruptedException ie) {
+//                                ie.printStackTrace();
+//                                return;
+//                            }
+//                        }
                     } catch(Exception e) {
                         if (e.getClass().equals(InterruptedException.class)) {
                             Log.e(TAG, "thread interrupted");
                             break;
                         }
-
                         Log.e(TAG, "connection broke");
                         e.printStackTrace();
 
@@ -144,24 +142,30 @@ public class ReceiverService extends Service {
     }
 
 
-    public void publishMessageToRabbit(final String rabbitMesaage)
-    {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try
-                {
-                    Connection connection = factory.newConnection();
-                    Channel channel = connection.createChannel();
-                    channel.basicPublish("cwTopic", tvRoutingKey, null, rabbitMesaage.getBytes("UTF-8"));
-                    channel.close();
-                    connection.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (TimeoutException e) {
-                    e.printStackTrace();
+    @Subscribe
+    public void getMessageSentToRabbit(final RabbitSendMessage rabbitSendMessage){
+        if(factory != null){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try
+                    {
+                        Log.d(TAG, "run: pusblishRabbitMEssage in try ");
+                        Connection connection = factory.newConnection();
+                        Log.d(TAG, "run: pusblishRabbitMEssage in connectiion created ");
+                        Channel channel = connection.createChannel();
+                        channel.basicPublish("kidsTopic", tvRoutingKey, null, rabbitSendMessage.getRabbitMessage().getBytes("UTF-8"));
+                        Log.d(TAG, "run: pusblishRabbitMEssage  published ");
+                        channel.close();
+                        connection.close();
+                        Log.d(TAG, "run: pusblishRabbitMEssage closed ");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (TimeoutException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        }).start();
+            }).start();
+        }
     }
 }

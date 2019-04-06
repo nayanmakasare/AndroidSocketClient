@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_centerHorizontal="true">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profileImageFrag"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"
+        android:src="@drawable/circlenext"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="10dp"/>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:textColorHint="@color/primaryTextColor">
+
+        <TextView
+            android:id="@+id/userNameTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:enabled="false"
+            android:editable="false"
+            android:textColor="@color/primaryTextColor"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColorHint="@color/primaryTextColor">
+
+        <TextView
+            android:id="@+id/userEmailTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:enabled="false"
+            android:editable="false"
+            android:textColor="@color/primaryTextColor"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColorHint="@color/primaryTextColor">
+
+        <TextView
+            android:id="@+id/userMobileTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:enabled="false"
+            android:editable="false"
+            android:textColor="@color/primaryTextColor"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColorHint="@color/primaryTextColor">
+
+        <TextView
+            android:id="@+id/userGenderTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:enabled="false"
+            android:editable="false"
+            android:textColor="@color/primaryTextColor"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColorHint="@color/primaryTextColor">
+
+        <TextView
+            android:id="@+id/userGenreTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:enabled="false"
+            android:editable="false"
+            android:textColor="@color/primaryTextColor"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColorHint="@color/primaryTextColor">
+
+        <TextView
+            android:id="@+id/userLanguageTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:enabled="false"
+            android:editable="false"
+            android:textColor="@color/primaryTextColor"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColorHint="@color/primaryTextColor">
+
+        <TextView
+            android:id="@+id/userDobTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:enabled="false"
+            android:editable="false"
+            android:textColor="@color/primaryTextColor"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColorHint="@color/primaryTextColor">
+
+        <TextView
+            android:id="@+id/userTypeTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:enabled="false"
+            android:editable="false"
+            android:textColor="@color/primaryTextColor"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColorHint="@color/primaryTextColor">
+
+        <TextView
+            android:id="@+id/userDeviceInfoTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:enabled="false"
+            android:editable="false"
+            android:textColor="@color/primaryTextColor"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>

@@ -2,7 +2,7 @@
     <string name="app_name">AndroidSocketClient</string>
 
 
-    <string name="clientId">231757569892-kj5fclgdo0i0ujlv8trp346ajpvh2i68.apps.googleusercontent.com</string>
+    <string name="clientId">231757569892-r8n8qbr74q7jqg7k9thkl4j7a8a22420.apps.googleusercontent.com</string>
 
     <string name="clientSerect">ccvLOdm6UmGduBtv4iBmEiOL</string>
 
@@ -15,7 +15,7 @@
     <!--<string name="rabbit_userName">tvrabbit</string>-->
     <!--<string name="rabbit_password">t^ra66!T</string>-->
 
-    <string name="rabbit_exchange">kidsTopic</string>
+    <string name="rabbit_exchange">companionTopic</string>
 
     <string name="rabbit_host">woodpecker.rmq.cloudamqp.com</string>
     <string name="rabbit_port">5672</string>
@@ -36,5 +36,15 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_prime">PrimeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+
+
+    <string-array name="genre">
+        <item></item>
+    </string-array>
 
 </resources>

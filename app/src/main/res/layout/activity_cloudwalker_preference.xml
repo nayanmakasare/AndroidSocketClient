@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".CloudwalkerPreferenceActivity">
+
+    <!--android:background="@color/primaryBackgroundColor"-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/completeProfileMessage"
+        android:text="Complete your Profile"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="28sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColorHint="@color/primaryTextColor">
+
+        <EditText
+            android:id="@+id/userDob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:hint="Date of Birth"
+            android:singleLine="true"
+            android:textColor="@color/primaryTextColor"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColorHint="@color/primaryTextColor">
+
+        <EditText
+            android:id="@+id/userMobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:hint="Mobile Number"
+            android:singleLine="true"
+            android:textColor="@color/primaryTextColor"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColorHint="@color/primaryTextColor">
+
+        <!--<EditText-->
+            <!--android:id="@+id/userGenre"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:layout_marginEnd="30dp"-->
+            <!--android:inputType="textEmailAddress"-->
+            <!--android:maxLines="1"-->
+            <!--android:hint="Genre"-->
+            <!--android:singleLine="true"-->
+            <!--android:textColor="@color/primaryTextColor"/>-->
+
+        <Utils.MultiSelectSpinner
+            android:id="@+id/mySpinner1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColorHint="@color/primaryTextColor">
+
+        <!--<EditText-->
+            <!--android:id="@+id/userLanguage"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:layout_marginEnd="30dp"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:inputType="textEmailAddress"-->
+            <!--android:maxLines="1"-->
+            <!--android:hint="Launguage"-->
+            <!--android:singleLine="true"-->
+            <!--android:textColor="@color/primaryTextColor"/>-->
+
+
+        <Utils.MultiSelectSpinner
+            android:id="@+id/mySpinner2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColorHint="@color/primaryTextColor">
+
+        <!--<EditText-->
+            <!--android:id="@+id/userType"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="30dp"-->
+            <!--android:layout_marginEnd="30dp"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:inputType="textEmailAddress"-->
+            <!--android:maxLines="1"-->
+            <!--android:hint="Type"-->
+            <!--android:singleLine="true"-->
+            <!--android:textColor="@color/primaryTextColor"/>-->
+
+        <Utils.MultiSelectSpinner
+            android:id="@+id/mySpinner3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColorHint="@color/primaryTextColor">
+
+        <EditText
+            android:id="@+id/userGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="20dp"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:hint="Gender"
+            android:singleLine="true"
+            android:textColor="@color/primaryTextColor"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/nextPrefButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"
+        android:src="@drawable/nextbutton"
+        android:layout_marginTop="20dp"
+        android:onClick="goToMain"/>
+
+</LinearLayout>

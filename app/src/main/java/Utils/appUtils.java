@@ -1,8 +1,17 @@
 package Utils;
 
+import android.content.Context;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import model.ProfileObject;
+import model.SingleProfileResponseObject;
 
 public class appUtils
 {
@@ -29,5 +38,40 @@ public class appUtils
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static ProfileObject getProfileObjFromResponseObj(SingleProfileResponseObject responseObject) {
+        ProfileObject profileObject = new ProfileObject();
+        profileObject.setName(responseObject.getName());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date date = simpleDateFormat.parse(responseObject.getDob());
+            profileObject.setDob(date.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        profileObject.setMobileNumber(responseObject.getMobileNumber());
+        profileObject.setGender(responseObject.getGender());
+        profileObject.setGenres(responseObject.getGenres());
+        profileObject.setLanguages(responseObject.getLanguages());
+        profileObject.setContentTypes(responseObject.getContentType());
+        profileObject.setFavourites(responseObject.getFavourites());
+        return profileObject;
+    }
+
+    public static String loadJSONFromAsset(Context context) {
+        String json ;
+        try {
+            InputStream is = context.getAssets().open("profile_config.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
     }
 }
