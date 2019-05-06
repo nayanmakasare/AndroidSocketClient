@@ -5,12 +5,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.util.AttributeSet;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
+import tv.cloudwalker.androidsocketclient.R;
 
 public class MultiSelectSpinner extends android.support.v7.widget.AppCompatSpinner implements DialogInterface.OnMultiChoiceClickListener
 {
@@ -22,18 +23,16 @@ public class MultiSelectSpinner extends android.support.v7.widget.AppCompatSpinn
     public MultiSelectSpinner(Context context)
     {
         super(context);
-        simple_adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item);
+        simple_adapter = new ArrayAdapter<>(context, R.layout.spinner_item);
         super.setAdapter(simple_adapter);
     }
 
     public MultiSelectSpinner(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        simple_adapter = new ArrayAdapter<String>(context,
-                android.R.layout.simple_spinner_item);
+        simple_adapter = new ArrayAdapter<>(context, R.layout.spinner_item);
             super.setAdapter(simple_adapter);
     }
-
 
     @Override
     public void onClick(DialogInterface dialog, int which, boolean isChecked) {

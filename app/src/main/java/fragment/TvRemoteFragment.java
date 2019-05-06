@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import Utils.OttoBus;
 import model.NsdSocketSendMessage;
+import tv.cloudwalker.androidsocketclient.PrimeActivity;
 import tv.cloudwalker.androidsocketclient.R;
 
 public class TvRemoteFragment extends Fragment implements View.OnClickListener
@@ -43,32 +44,32 @@ public class TvRemoteFragment extends Fragment implements View.OnClickListener
         {
             case R.id.keyCenter :
             {
-                OttoBus.getBus().post(new NsdSocketSendMessage("23"));
+                ((PrimeActivity)getActivity()).mNSDDiscover.sayHello("23");
                 break;
             }
             case R.id.keyLeft :
             {
-                OttoBus.getBus().post(new NsdSocketSendMessage("21"));
+                ((PrimeActivity)getActivity()).mNSDDiscover.sayHello("21");
                 break;
             }
             case R.id.keyRight :
             {
-                OttoBus.getBus().post(new NsdSocketSendMessage("22"));
+                ((PrimeActivity)getActivity()).mNSDDiscover.sayHello("22");
                 break;
             }
             case R.id.keyDown :
             {
-                OttoBus.getBus().post(new NsdSocketSendMessage("20"));
+                ((PrimeActivity)getActivity()).mNSDDiscover.sayHello("20");
                 break;
             }
             case R.id.keyUp :
             {
-                OttoBus.getBus().post(new NsdSocketSendMessage("19"));
+                ((PrimeActivity)getActivity()).mNSDDiscover.sayHello("19");
                 break;
             }
             case R.id.keyBack :
             {
-                OttoBus.getBus().post(new NsdSocketSendMessage("4"));
+                ((PrimeActivity)getActivity()).mNSDDiscover.sayHello("4");
                 break;
             }
         }

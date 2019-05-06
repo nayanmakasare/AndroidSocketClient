@@ -40,6 +40,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onStart() {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        Log.d(TAG, "onStart: "+account);
         if(account == null) {
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
         }else {
@@ -64,7 +65,6 @@ public class SignInActivity extends Activity implements View.OnClickListener {
             updateUI(account);
         } catch (ApiException e) {
             e.printStackTrace();
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode()+" "+e.getMessage()+" "+e.getStatusMessage());
             updateUI(null);
         }
     }
@@ -101,15 +101,11 @@ public class SignInActivity extends Activity implements View.OnClickListener {
     }
 
     private void signOut() {
-        Log.d(TAG, "signOut: ");
         mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 //On Succesfull signout we navigate the user back to LoginActivity
-                Log.d(TAG, "onComplete: signout");
-                Intent intent=new Intent(SignInActivity.this,MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                System.exit(0);
             }
         });
     }

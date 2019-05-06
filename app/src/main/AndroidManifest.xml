@@ -18,39 +18,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BeginSetUpActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <service
-            android:name="services.RabbitIntentService"
-            android:exported="false" />
-        <service
-            android:name="services.NSDIntentService"
-            android:exported="false" />
-
         <activity
             android:name=".PrimeActivity"
             android:label="@string/title_activity_prime"
-            android:parentActivityName=".NsdActivity">
+            android:parentActivityName=".SignInActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="tv.cloudwalker.androidsocketclient.NsdActivity" />
-        </activity>
-        <activity android:name=".NsdActivity" />
-        <activity android:name=".NoNetworkActivity" />
-        <activity android:name=".CloudwalkerPreferenceActivity" />
-        <activity android:name=".IntermideateActivity" />
-        <activity android:name=".ProfileCreationActivity" />
-        <activity android:name=".ClientActivity" />
-        <activity android:name=".RabbitActivity" />
-        <activity android:name=".CloudwalkerFormActivity" />
-        <activity android:name=".SignInActivity" />
-        <activity android:name=".MainActivity">
+                android:value="tv.cloudwalker.androidsocketclient.SignInActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -58,12 +32,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CloudwalkerPreferenceActivity" />
+        <activity android:name=".IntermideateActivity" />
+        <activity android:name=".SignInActivity">
+        </activity>
 
         <service
             android:name=".ReceiverService"
             android:enabled="false" />
-        <service android:name="services.CloudwalkerNSDService" />
-        <service android:name="services.CloudwalkerRabbitService" />
     </application>
 
 </manifest>

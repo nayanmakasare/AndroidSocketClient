@@ -33,7 +33,7 @@ public class PreferenceManager {
     private static final String GENDER = "gender";
     private static final String RABBIT_SERVICE_ON = "rabbitServiceOn";
     private static final String NSD_SERVICE_ON = "nsdServiceOn";
-
+    private static final String LINKED_NSD_DEVICES = "linkedNsdDevices";
 
 
 
@@ -60,6 +60,17 @@ public class PreferenceManager {
 
     public void setUserName(String userName) {
         mEditor.putString(USER_NAME, userName);
+        mEditor.commit();
+    }
+
+    public Set<String> getLinkedNsdDevices()
+    {
+        return mPreferences.getStringSet(LINKED_NSD_DEVICES, null);
+    }
+
+    public void setLinkedNsdDevices(Set<String> linkedDevices)
+    {
+        mEditor.putStringSet(LINKED_NSD_DEVICES, linkedDevices);
         mEditor.commit();
     }
 
